@@ -2,7 +2,7 @@ var faker = require('faker');
 const db = require('../database');
 var fakeArr =[] 
 
-for (let i=0;i<99;i++) {
+for (let i=0;i<=99;i++) {
 	var fakeObj= {};
 	fakeObj.textContent = faker.lorem.sentence();
 	fakeObj.dateCreated = new Date().toISOString().slice(0, 19).replace('T', ' ');
@@ -17,15 +17,22 @@ for (let i=0;i<99;i++) {
 var storeFakeData = function(commentObject) {
 	db.AddComment(commentObject,
 		(err,comment)=> {
-			if (err) {throw err;}
+			if (err) {console.log(err);throw err;}
 			else {console.log('it got added');}
 		}
 	)
 }
 
-for (i=0;i<20;i++) {
-	storeFakeData(fakeArr[i]);
+var storeManyFakeData = function(commentArr) {
+	db.AddMany(commentArr,
+		(err,comment)=> {
+			if (err) {console.log(err);throw err;}
+			else {console.log('they got added');}
+		}
+	)
 }
+
+storeManyFakeData(fakeArr);
 
 // for (i=0;i<99;i++) {
 // 	setTimeout(function(){storeFakeData(fakeArr[i])},i*150);
