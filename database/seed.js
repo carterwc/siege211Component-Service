@@ -14,14 +14,6 @@ for (let i=0;i<=99;i++) {
 //
 
 
-var storeFakeData = function(commentObject) {
-	db.AddComment(commentObject,
-		(err,comment)=> {
-			if (err) {console.log(err);throw err;}
-			else {console.log('it got added');}
-		}
-	)
-}
 
 var storeManyFakeData = function(commentArr) {
 	db.AddMany(commentArr,
