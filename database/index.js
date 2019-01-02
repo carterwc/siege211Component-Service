@@ -32,8 +32,20 @@ const AddMany = function(commentsArr,callback) {
 	);
 }
 
+const getAllComments = function(callback) {
+  return connection.query("SELECT * FROM Comments WHERE id < 101;",function (err, result, fields) {
+    if (err) {
+    	callback(err)
+    }
+    else {
+    	callback(null,result)
+    }
+  })
+};
+
 
 
 module.exports = {
-	AddMany
+	AddMany,
+	getAllComments
 };
