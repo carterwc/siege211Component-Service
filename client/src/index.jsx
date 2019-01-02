@@ -6,12 +6,21 @@ const styles = {
     paddingTop: 40,
     textAlign: 'center',
     border: '#becde5 1px solid',
-    borderRadius: '25px'
+    borderRadius: '5px'
   },
   parentComment: {
     display: 'flex',
+    flexDirection:'column',
     border: '#becde5 1px solid',
-    borderRadius: '25px'
+    borderRadius: '25px',
+    minHeight: '40px',
+    padding: '6px'
+  },
+  dateDiv: {
+    display: 'flex',
+    flexDirection:'row',
+    justifyContent: 'flex-end',
+    alignContent: 'flex-end',
   }
 }
 
@@ -38,7 +47,7 @@ class App extends Component {
           let date = comment.dateCreated;
         return (
           <div style={styles.parentComment} key={`comment#${i}`}>
-            <div>{`${date.substring(0,10)}: ${date.substring(11,16)}`}</div>
+            <div style={styles.dateDiv}>{`${date.substring(0,10)}: ${date.substring(11,16)}`}</div>
             <div>{comment.user}</div>
             <div>{comment.textContent}</div>
       </div>
