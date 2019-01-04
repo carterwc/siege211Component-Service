@@ -27,8 +27,12 @@ app.post('/api/comments', (req,res) => {
 	console.log(req.body);
 	db.AddOne(req.body,
 		(err,comment) => {
-			if (err) {throw err;}
-			else {console.log(comment);res.send('posted!').redirect('/').end()}
+			if (err) {console.log('error in express');throw err;}
+			else {
+				console.log(comment);
+				res.send(200,comment.insertId)}
+				// need to send the id of the comment that was posted
+				// for fetching purposes
 		}
 	)
 })

@@ -16,8 +16,7 @@ class InputComment extends Component {
 
 	postComment() {
 		let timeOfPost = new Date().toISOString().slice(0, 19).replace('T', ' ');
-		console.log('clicked');
-		axios.post('/api/test',{
+		axios.post('/api/comments',{
 		'textContent': this.state.commentText,
     'dateCreated': timeOfPost,
     'user': 'DefaultUser',
@@ -31,7 +30,7 @@ class InputComment extends Component {
 				// based on res.data
 			})
 		.catch(err => {
-			console.log(err)
+			console.log('client side error: ',err)
 		})
   }
 

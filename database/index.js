@@ -47,7 +47,7 @@ const AddOne = function(comment,callback) {
 	return connection.query(
 		"INSERT INTO comments (textContent, dateCreated,user,idParentComment) VALUES ('"+comment.textContent+"', '"+comment.dateCreated.toString()+"', '"+comment.user+"', '"+comment.idParentComment+"')",
 		function (err,result,fields) {
-			if (err) {callback(err);}
+			if (err) {console.log('DB.AddOne error callback: ');callback(err);}
 			else {callback(null,result)}
 		}
 	)
