@@ -29,10 +29,12 @@ const styles = {
     flexDirection:'row',
     justifySelf: 'flex-end',
     alignSelf: 'flex-end',
+    fontSize: '14px'
   },
   userSpan: {
     alignSelf: 'flex-start',
-    justifySelf: 'flex-start'
+    justifySelf: 'flex-start',
+    fontSize: '14px'
   },
   userDateDiv: {
     display: 'flex',
@@ -77,7 +79,7 @@ class App extends Component {
   render() {
     return (
       <div style={styles.app} id='app'>
-      <ParentComment />
+     
         {this.state.comments.map((comment,i) => {
           let date = comment.dateCreated;
           let calendarDay = date.substring(0,10);

@@ -31,21 +31,39 @@ const styles = {
     display: 'flex',
     alignContent: 'flex-start',
     paddingLeft: '4px'
+  },
+  visibleReplyButton: {
+  	justifySelf: 'flex-end',
+  	alignSelf: 'flex-end',
+  	position: 'relative',
+  	bottom: '10px'
+  },
+  invisibleReplyButton:{
+  	justifySelf: 'flex-end',
+  	alignSelf: 'flex-end',
+  	position: 'relative',
+  	bottom: '10px',
+  	backgroundColor: 'white',
+  	color: 'white'
   }
 }
 class ParentComment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-    	hover: false
+    	hover: false,
+    	replyButton: styles.invisibleReplyButton
     }
   }
     mouseOver(){
-    console.log('mouseover!');
+    console.log(this.state);
+    this.setState({replyButton: styles.visibleReplyButton});
   }
 
   mouseOut(){
-    console.log('mouseOut');
+    console.log(this.state);
+
+    this.setState({replyButton: styles.invisibleReplyButton});
   }
   render() {
   	return (
@@ -54,7 +72,7 @@ class ParentComment extends Component {
         onMouseOver={() => this.mouseOver()}
         onMouseOut={()=>this.mouseOut()}>
         {this.props.children}
-            
+        <span style={this.state.replyButton}>Reply</span>
       </div>
   	)
   }
