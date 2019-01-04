@@ -1,21 +1,26 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+const currentDate = new Date();
+console.log(currentDate);
 const styles = {
   app: {
     paddingTop: 40,
     textAlign: 'center',
-    border: '#becde5 1px solid',
+    border: '1px solid rgba(121, 124, 127, .2)',
     borderRadius: '5px',
-    marginLeft: '15px'
+    marginLeft: '15px',
+    maxWidth: '55%',
+    minWidth: '40%'
   },
   parentComment: {
     display: 'flex',
     flexDirection:'column',
-    border: '#becde5 1px solid',
     borderRadius: '25px',
     minHeight: '40px',
     padding: '6px',
+    color: '#797c7f',
+    marginBottom: '6px'
   },
   dateSpan: {
     display: 'flex',
@@ -31,6 +36,13 @@ const styles = {
     display: 'flex',
     justifyContent: 'space-between',
     flexDirection: 'row'
+  },
+  textContentSpan: {
+    color: 'black',
+    fontSize: '16px',
+    display: 'flex',
+    alignContent: 'flex-start',
+    paddingLeft: '4px'
   }
 }
 
@@ -55,19 +67,23 @@ class App extends Component {
       <div style={styles.app} id='app'>
         {this.state.comments.map((comment,i) => {
           let date = comment.dateCreated;
+          let calendarDay = date.substring(0,10);
+          let timeOfDay = date.substring(11,16);
+          console.log(date);
+
         return (
           <div style={styles.parentComment} key={`comment#${i}`}>
             
 
             <div style={styles.userDateDiv}>
-              <span>{comment.user}</span>
-              <span style={styles.dateSpan}>{`${date.substring(0,10)}: ${date.substring(11,16)}`}</span>
+              <span>{comment.user}:</span>
+              <span style={styles.dateSpan}>{`${calendarDay}: ${timeOfDay}`}</span>
               
             </div>
             
 
 
-            <div>{comment.textContent}</div>
+            <div style={styles.textContentSpan}>{comment.textContent}</div>
       </div>
         )
       })}
