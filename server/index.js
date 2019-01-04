@@ -35,7 +35,7 @@ app.post('/api/comments', (req,res) => {
 
 app.post('/api/test', (req,res) => {
 	console.log(req.body);
-	res.end();
+	res.send('posted');
 	})
 
 
