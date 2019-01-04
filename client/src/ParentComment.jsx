@@ -55,7 +55,8 @@ class ParentComment extends Component {
     	replyButton: styles.invisibleReplyButton
     }
   }
-    mouseOver(){
+  
+  mouseOver(){
     this.setState({replyButton: styles.visibleReplyButton});
   }
 

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
 import ParentComment from './ParentComment.jsx';
+import InputComment from './InputComment.jsx';
 console.log(ParentComment);
 const currentDate = new Date();
 console.log(currentDate);
@@ -69,15 +70,11 @@ class App extends Component {
   }
 
 
-
   render() {
     return (
       <div style={styles.app} id='app'>
-     
-        <form method="post" action="/api/test">
-          <input name="first" type='text' placeholder="Write a comment"/>
-          <input type='submit'/>
-        </form>
+        
+        <InputComment />
 
         {this.state.comments.map((comment,i) => {
           let date = comment.dateCreated;

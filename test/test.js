@@ -1,6 +1,6 @@
 // import React from 'react';
 // import { shallow, mount, render } from 'enzyme';
-// import App from '../client/src/index';
+ import App from '../client/src/index';
 // import ReactDOM from 'react-dom';
 
 describe('A suite', function() {
@@ -11,7 +11,7 @@ describe('A suite', function() {
     expect(shallow(<App />).contains(<div style={styles.app} id="app">Welcome to React!</div>)).toBe(true);
   });
 
-  // it('should be selectable by class "header"', function() {
+  /// it('should be selectable by class "header"', function() {
   //   expect(shallow(<App />).is('.header')).toBe(true);
   // });
 
