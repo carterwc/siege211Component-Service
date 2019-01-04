@@ -1,19 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import axios from 'axios';
-const currentDate = new Date();
-console.log(currentDate);
+
 const styles = {
-  app: {
-    paddingTop: 40,
-    textAlign: 'center',
-    border: '1px solid rgba(121, 124, 127, .2)',
-    borderRadius: '5px',
-    marginLeft: '15px',
-    maxWidth: '55%',
-    minWidth: '40%'
-  },
-  parentComment: {
+	parentComment: {
     display: 'flex',
     flexDirection:'column',
     borderRadius: '25px',
@@ -45,44 +33,23 @@ const styles = {
     paddingLeft: '4px'
   }
 }
-
-class App extends Component {
+class ParentComment extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments: [{dateCreated: '15',user:'shaggy',textContent:'nope'}]
-    };
+    	hover: false
+    }
   }
-  componentDidMount() {
-    axios.get('/api/comments')
-    .then(response => {
-      console.log("Array of comments: ",response.data);
-      this.setState({comments: response.data});
-    })
-    .catch(err => {
-    console.log(err)
-    })
-  }
-
-  mouseOver(){
+    mouseOver(){
     console.log('mouseover!');
   }
 
   mouseOut(){
     console.log('mouseOut');
   }
-
   render() {
-    return (
-      <div style={styles.app} id='app'>
-        {this.state.comments.map((comment,i) => {
-          let date = comment.dateCreated;
-          let calendarDay = date.substring(0,10);
-          let timeOfDay = date.substring(11,16);
-          console.log(date);
-
-        return (
-          <div 
+  	return (
+  		<div 
             style={styles.parentComment} 
             key={`comment#${i}`}
             onMouseOver={() => this.mouseOver()}
@@ -99,14 +66,8 @@ class App extends Component {
 
             <div style={styles.textContentSpan}>{comment.textContent}</div>
       </div>
-        )
-      })}
-      </div>
-    )
+  	)
   }
 }
 
-const root = document.querySelector('#app')
-ReactDOM.render(<App />, root)
-
-export default App;
+export default ParentComment;
