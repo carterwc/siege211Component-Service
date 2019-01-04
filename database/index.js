@@ -45,7 +45,7 @@ const getAllComments = function(callback) {
 
 const AddOne = function(comment,callback) {
 	return connection.query(
-		"INSERT INTO comments (textContent, dateCreated,user,idParentComment) VALUES ('"+data.textContent+"', '"+data.dateCreated.toString()+"', '"+data.user+"', '"+data.idParentComment+"')",
+		"INSERT INTO comments (textContent, dateCreated,user,idParentComment) VALUES ('"+comment.textContent+"', '"+comment.dateCreated.toString()+"', '"+comment.user+"', '"+comment.idParentComment+"')",
 		function (err,result,fields) {
 			if (err) {callback(err);}
 			else {callback(null,result)}

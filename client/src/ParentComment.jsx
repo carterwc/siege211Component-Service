@@ -56,12 +56,10 @@ class ParentComment extends Component {
     }
   }
     mouseOver(){
-    console.log(this.state);
     this.setState({replyButton: styles.visibleReplyButton});
   }
 
   mouseOut(){
-    console.log(this.state);
 
     this.setState({replyButton: styles.invisibleReplyButton});
   }

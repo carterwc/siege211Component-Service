@@ -68,20 +68,14 @@ class App extends Component {
     })
   }
 
-  mouseOver(){
-    console.log('mouseover!');
-  }
 
-  mouseOut(){
-    console.log('mouseOut');
-  }
 
   render() {
     return (
       <div style={styles.app} id='app'>
      
-        <form>
-          <input type='text' placeholder="Write a comment"/>
+        <form method="post" action="/api/test">
+          <input name="first" type='text' placeholder="Write a comment"/>
           <input type='submit'/>
         </form>
 
