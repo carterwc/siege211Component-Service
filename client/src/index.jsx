@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import ParentComment from './ParentComment.jsx';
+console.log(ParentComment);
 const currentDate = new Date();
 console.log(currentDate);
 const styles = {
@@ -75,6 +77,7 @@ class App extends Component {
   render() {
     return (
       <div style={styles.app} id='app'>
+      <ParentComment />
         {this.state.comments.map((comment,i) => {
           let date = comment.dateCreated;
           let calendarDay = date.substring(0,10);
@@ -82,13 +85,11 @@ class App extends Component {
           console.log(date);
 
         return (
-          <div 
+          <ParentComment 
             style={styles.parentComment} 
-            key={`comment#${i}`}
-            onMouseOver={() => this.mouseOver()}
-            onMouseOut={()=>this.mouseOut()}>
+            key={`comment#${i}`}>
             
-
+          
             <div style={styles.userDateDiv}>
               <span>{comment.user}:</span>
               <span style={styles.dateSpan}>{`${calendarDay}: ${timeOfDay}`}</span>
@@ -98,7 +99,7 @@ class App extends Component {
 
 
             <div style={styles.textContentSpan}>{comment.textContent}</div>
-      </div>
+          </ParentComment>
         )
       })}
       </div>

@@ -50,21 +50,11 @@ class ParentComment extends Component {
   render() {
   	return (
   		<div 
-            style={styles.parentComment} 
-            key={`comment#${i}`}
-            onMouseOver={() => this.mouseOver()}
-            onMouseOut={()=>this.mouseOut()}>
+        style={styles.parentComment} 
+        onMouseOver={() => this.mouseOver()}
+        onMouseOut={()=>this.mouseOut()}>
+        {this.props.children}
             
-
-            <div style={styles.userDateDiv}>
-              <span>{comment.user}:</span>
-              <span style={styles.dateSpan}>{`${calendarDay}: ${timeOfDay}`}</span>
-              
-            </div>
-            
-
-
-            <div style={styles.textContentSpan}>{comment.textContent}</div>
       </div>
   	)
   }
