@@ -23,6 +23,17 @@ app.get('/api/comments', (req, res) => {
  
 });
 
+app.post('/api/comments', (req,res) => {
+	console.log(req.body);
+	res.send('yep');
+	// db.AddOne(req.body,
+	// 	(err,comment) => {
+	// 		if (err) {throw err};
+	// 		else {}
+	// 	}
+	// )
+})
+
 
 
 app.listen(PORT, () => {

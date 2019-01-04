@@ -33,7 +33,7 @@ const AddMany = function(commentsArr,callback) {
 }
 
 const getAllComments = function(callback) {
-  return connection.query("SELECT * FROM Comments WHERE id < 101;",function (err, result, fields) {
+  return connection.query("SELECT * FROM Comments;",function (err, result, fields) {
     if (err) {
     	callback(err)
     }
@@ -43,9 +43,20 @@ const getAllComments = function(callback) {
   })
 };
 
+const AddOne = function(comment,callback) {
+	return connection.query(
+		"INSERT INTO comments (textContent, dateCreated,user,idParentComment) VALUES ('"+data.textContent+"', '"+data.dateCreated.toString()+"', '"+data.user+"', '"+data.idParentComment+"')",
+		function (err,result,fields) {
+			if (err) {callback(err);}
+			else {callback(null,result)}
+		}
+	)
+}
+
 
 
 module.exports = {
 	AddMany,
-	getAllComments
+	getAllComments,
+	AddOne
 };

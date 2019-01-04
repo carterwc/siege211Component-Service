@@ -80,28 +80,32 @@ class App extends Component {
     return (
       <div style={styles.app} id='app'>
      
+        <form>
+          <input type='text' placeholder="Write a comment"/>
+          <input type='submit'/>
+        </form>
+
         {this.state.comments.map((comment,i) => {
           let date = comment.dateCreated;
           let calendarDay = date.substring(0,10);
           let timeOfDay = date.substring(11,16);
           console.log(date);
-
-        return (
-          <ParentComment 
-            style={styles.parentComment} 
-            key={`comment#${i}`}>
-            
-          
-            <div style={styles.userDateDiv}>
-              <span>{comment.user}:</span>
-              <span style={styles.dateSpan}>{`${calendarDay}: ${timeOfDay}`}</span>
+          return (
+            <ParentComment 
+              style={styles.parentComment} 
+              key={`comment#${i}`}>
               
-            </div>
             
+              <div style={styles.userDateDiv}>
+                <span>{comment.user}:</span>
+                <span style={styles.dateSpan}>{`${calendarDay}: ${timeOfDay}`}</span>
+                
+              </div>
+              
 
 
-            <div style={styles.textContentSpan}>{comment.textContent}</div>
-          </ParentComment>
+              <div style={styles.textContentSpan}>{comment.textContent}</div>
+            </ParentComment>
         )
       })}
       </div>
