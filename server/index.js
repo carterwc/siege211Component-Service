@@ -31,8 +31,8 @@ app.post('/api/comments', (req,res) => {
 			else {
 				console.log(comment);
 				res.send(200,comment.insertId)}
-				// need to send the id of the comment that was posted
-				// for fetching purposes
+				// ^ Send insertId to client
+				// so that client can automatically add the correct comment
 		}
 	)
 })
