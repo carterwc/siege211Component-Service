@@ -57,16 +57,21 @@ class App extends Component {
     this.state = {
       comments: [{dateCreated: '15',user:'shaggy',textContent:'nope'}]
     };
+    this.handleNewComment = this.handleNewComment.bind(this);
   }
   componentDidMount() {
     axios.get('/api/comments')
     .then(response => {
       console.log("Array of comments: ",response.data);
-      this.setState({comments: response.data});
+      this.setState({comments: response.data.reverse()});
     })
     .catch(err => {
     console.log(err)
     })
+  }
+
+  handleNewComment(newComment) {
+    this.setState({comments: this.state.comments.reverse().concat(newComment).reverse()})
   }
 
 
@@ -74,7 +79,7 @@ class App extends Component {
     return (
       <div style={styles.app} id='app'>
         
-        <InputComment />
+        <InputComment addNewComment={this.handleNewComment}/>
 
         {this.state.comments.map((comment,i) => {
           let date = comment.dateCreated;

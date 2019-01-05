@@ -32,7 +32,7 @@ const AddMany = function(commentsArr,callback) {
 	);
 }
 
-const getAllComments = function(callback) {
+const GetAllComments = function(callback) {
   return connection.query("SELECT * FROM Comments;",function (err, result, fields) {
     if (err) {
     	callback(err)
@@ -54,9 +54,21 @@ const AddOne = function(comment,callback) {
 }
 
 
+const GetOneComment = function(commentId,callback) {
+	return connection.query("SELECT * FROM Comments WHERE id="+commentId+";",function (err, result, fields) {
+    if (err) {
+    	callback(err)
+    }
+    else {
+    	callback(null,result)
+    }
+  })
+}
+
 
 module.exports = {
 	AddMany,
-	getAllComments,
-	AddOne
+	GetAllComments,
+	AddOne,
+	GetOneComment
 };

@@ -15,6 +15,18 @@ class InputComment extends Component {
     this.setState({commentText: e.target.value});
 }
 
+	retrieveNewComment(commentId) {
+		axios.get(
+					'/api/singleComment',
+					{params: {
+						'commentId':commentId.toString()
+					}
+					}
+				)
+		.then(res => this.props.addNewComment(res.data))
+	}
+
+
 	postComment() {
 		let timeOfPost = new Date().toISOString().slice(0, 19).replace('T', ' ');
 		axios.post('/api/comments',{
@@ -27,6 +39,9 @@ class InputComment extends Component {
 			res => {
 				console.log(res.data);
 				this.setState({commentText: ''});
+				//console.log(this.props);
+				// 1. retrieve comment from database
+				this.retrieveNewComment(res.data);
 				// add a method here to write
 				// new comments into the UI 
 				// based on res.data

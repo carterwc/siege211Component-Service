@@ -11,20 +11,26 @@ app.use(express.static(__dirname + '/../client/public'));
 
 
 app.get('/api/comments', (req, res) => {
-	db.getAllComments( 
+	db.GetAllComments( 
 		(err,comments) => {
 			if (err) {throw err}
-			else {
-				res.send(comments);
-				
-			}
+			else {res.send(comments);}
 		}
 	);
  
 });
 
+app.get('/api/singleComment', (req,res) => {
+	console.log("comment id: ",req.query);
+	db.GetOneComment(req.query.commentId,
+		(err,comment) => {
+			if (err) {throw err}
+			else {res.send(comment)}
+		}
+	);
+})
+
 app.post('/api/comments', (req,res) => {
-	console.log(req.body);
 	db.AddOne(req.body,
 		(err,comment) => {
 			if (err) {console.log('error in express');throw err;}
@@ -36,11 +42,6 @@ app.post('/api/comments', (req,res) => {
 		}
 	)
 })
-
-app.post('/api/test', (req,res) => {
-	console.log(req.body);
-	res.send('posted');
-	})
 
 
 
