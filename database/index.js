@@ -32,8 +32,8 @@ const AddMany = function(commentsArr,callback) {
 	);
 }
 
-const getAllComments = function(callback) {
-  return connection.query("SELECT * FROM Comments WHERE id < 101;",function (err, result, fields) {
+const GetAllComments = function(callback) {
+  return connection.query("SELECT * FROM Comments;",function (err, result, fields) {
     if (err) {
     	callback(err)
     }
@@ -43,9 +43,32 @@ const getAllComments = function(callback) {
   })
 };
 
+const AddOne = function(comment,callback) {
+	return connection.query(
+		"INSERT INTO comments (textContent, dateCreated,user,idParentComment) VALUES ('"+comment.textContent+"', '"+comment.dateCreated.toString()+"', '"+comment.user+"', '"+comment.idParentComment+"')",
+		function (err,result,fields) {
+			if (err) {console.log('DB.AddOne error callback: ');callback(err);}
+			else {callback(null,result)}
+		}
+	)
+}
+
+
+const GetOneComment = function(commentId,callback) {
+	return connection.query("SELECT * FROM Comments WHERE id="+commentId+";",function (err, result, fields) {
+    if (err) {
+    	callback(err)
+    }
+    else {
+    	callback(null,result)
+    }
+  })
+}
 
 
 module.exports = {
 	AddMany,
-	getAllComments
+	GetAllComments,
+	AddOne,
+	GetOneComment
 };
