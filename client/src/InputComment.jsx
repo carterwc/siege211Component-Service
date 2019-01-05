@@ -7,6 +7,7 @@ class InputComment extends Component {
 			commentText: ''
 		}
 		this.handleChange = this.handleChange.bind(this);
+		this.postComment = this.postComment.bind(this);
 	}
 
 	handleChange(e) {
@@ -25,6 +26,7 @@ class InputComment extends Component {
 		.then(
 			res => {
 				console.log(res.data);
+				this.setState({commentText: ''});
 				// add a method here to write
 				// new comments into the UI 
 				// based on res.data
@@ -37,7 +39,7 @@ class InputComment extends Component {
   render() {
   	return (
   		<div>
-  			<input type='text' onChange={this.handleChange} placeholder="Write a Comment"/>
+  			<input type='text' onChange={this.handleChange} placeholder="Write a comment" value={this.state.commentText}/>
   			<button 
   			onClick={()=>this.postComment()}
   			>Post</button>
