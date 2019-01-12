@@ -1,4 +1,4 @@
-const { Sequelize, sequelize } = require('../config.js');
+const { Sequelize, sequelize } = require('../postgresDB/config.js');
 
 const Comment = sequelize.define(
   'comment',
