@@ -3,8 +3,9 @@ const bodyParser = require('body-parser');
 // const db = require('../database');
 const app = express();
 const PORT = 3004;
-const { Sequelize, sequelize } = require('../database/config.js');
-const { Comment } = require('../database/models/comments.js');
+const { Sequelize, sequelize } = require('../database/postgresDB/config.js');
+const { Comment } = require('../database/postgresDB/models/comments.js');
+require('../database/mongoDB/config.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));

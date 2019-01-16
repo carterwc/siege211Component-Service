@@ -3,8 +3,6 @@ CREATE DATABASE commentSection;
 use commentSection;
 
 
-
-
 CREATE TABLE Comments (
 	id int NOT NULL AUTO_INCREMENT,
 	textContent varchar(200) NOT NULL,

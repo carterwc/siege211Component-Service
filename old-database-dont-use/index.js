@@ -21,9 +21,6 @@ const AddMany = function (commentsArr, callback) {
 					}
 				})
 		})
-
-
-
 	})
 	Blue.all(promiseArray).then(result => {
 		connection.commit();
