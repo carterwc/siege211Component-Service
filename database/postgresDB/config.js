@@ -1,4 +1,3 @@
-
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('SDC', 'Brometheus58', '', {
   host: 'localhost',
@@ -20,4 +19,4 @@ module.exports = {
   sequelize
 }
 
-const Comment = require('./models/comments.js');
+// const Comment = require('./models/comments.js');
