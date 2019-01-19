@@ -4,8 +4,8 @@ const bodyParser = require('body-parser');
 const app = express();
 const PORT = 3004;
 const { Sequelize, sequelize } = require('../database/postgresDB/config.js');
-const { Comment } = require('../database/postgresDB/models/comments.js');
-require('../database/mongoDB/config.js');
+const { Comment, getComment, getAllComments, postComment } = require('../database/postgresDB/models/comments.js');
+// require('../database/mongoDB/config.js');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -13,41 +13,53 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static(__dirname + '/../client/public'));
 
 
+app.get('/api/comment/:id', (req, res) => {
+	getComment((error, results) => {
+		if (error) {
+			console.log(error, 'Error with Server GET!');
+			res.status(500).send(error);
+		} else {
+			console.log(results, 'Results from server GET!');
+			res.json(results);
+		}
+	});
+});
 
-// app.get('/api/comments', (req, res) => {
-// 	db.GetAllComments(
-// 		(err, comments) => {
-// 			if (err) { throw err }
-// 			else { res.send(comments); }
-// 		}
-// 	);
+app.get('/api/comments', (req, res) => {
+	getAllComments((error, results) => {
+		if (error) {
+			console.log(error, 'Error with Get All Comments Server!');
+			res.status(500).send(error);
+		} else {
+			console.log(results, 'Results from get All Comments Server!');
+			res.json(results);
+		}
+	});
+});
 
-// });
 
-// app.get('/api/singlecomment', (req, res) => {
-// 	console.log("comment id: ", req.query);
-// 	db.GetOneComment(req.query.commentId,
-// 		(err, comment) => {
-// 			if (err) { throw err }
-// 			else { res.send(comment) }
-// 		}
-// 	);
+app.post('/api/comment', (req, res) => {
+	console.log(req.body, 'Body on the post????');
+	console.log(req.params, 'Params!! on the post????');
+
+	postComment((error, results) => {
+		if (error) {
+			console.log(error, 'Error with posting from SERVER!');
+			res.status(500).send(error);
+		} else {
+			console.log(results, 'Successful post from Server...Results!');
+			res.json(results);
+		}
+	});
+});
+
+// app.put('/api/comment', (req, res) => {
+
 // })
 
-// app.post('/api/comments', (req, res) => {
-// 	db.AddOne(req.body,
-// 		(err, comment) => {
-// 			if (err) { console.log('error in express'); throw err; }
-// 			else {
-// 				console.log(comment);
-// 				res.send(200, comment.insertId)
-// 			}
-// 			// ^ Send insertId to client
-// 			// so that client can automatically add the correct comment
-// 		}
-// 	)
-// })
+// app.delete('/api/comment', (req, res) => {
 
+// })
 
 sequelize
 	.authenticate()
