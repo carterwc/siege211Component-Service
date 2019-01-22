@@ -1,3 +1,4 @@
+// require('newrelic');
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
@@ -18,7 +19,7 @@ const styles = {
   },
   parentComment: {
     display: 'flex',
-    flexDirection:'column',
+    flexDirection: 'column',
     borderRadius: '25px',
     minHeight: '40px',
     padding: '6px',
@@ -27,7 +28,7 @@ const styles = {
   },
   dateSpan: {
     display: 'flex',
-    flexDirection:'row',
+    flexDirection: 'row',
     justifySelf: 'flex-end',
     alignSelf: 'flex-end',
     fontSize: '14px'
@@ -55,55 +56,57 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comments: [{dateCreated: '15',user:'shaggy',textContent:'nope'}]
+      comments: [{ dateCreated: '15', user: 'shaggy', textContent: 'nope' }]
     };
     this.handleNewComment = this.handleNewComment.bind(this);
   }
   componentDidMount() {
-    axios.get('/api/comments')
-    .then(response => {
-      console.log("Array of comments: ",response.data);
-      this.setState({comments: response.data.reverse()});
-    })
-    .catch(err => {
-    console.log(err)
-    })
+    var id = window.location.pathname.slice(1, window.location.pathname.length - 1);
+    if (!id) { id = 1 };
+    axios.get(`/api/comments/${id}`)
+      .then(response => {
+        console.log("Array of comments: ", response.data);
+        this.setState({ comments: response.data.reverse() });
+      })
+      .catch(err => {
+        console.log(err)
+      })
   }
 
   handleNewComment(newComment) {
-    this.setState({comments: this.state.comments.reverse().concat(newComment).reverse()})
+    this.setState({ comments: this.state.comments.reverse().concat(newComment).reverse() })
   }
 
 
   render() {
     return (
       <div style={styles.app} id='app'>
-        
-        <InputComment addNewComment={this.handleNewComment}/>
 
-        {this.state.comments.map((comment,i) => {
+        <InputComment addNewComment={this.handleNewComment} />
+
+        {this.state.comments.map((comment, i) => {
           let date = comment.dateCreated;
-          let calendarDay = date.substring(0,10);
-          let timeOfDay = date.substring(11,16);
+          let calendarDay = date.substring(0, 10);
+          let timeOfDay = date.substring(11, 16);
           console.log(date);
           return (
-            <ParentComment 
-              style={styles.parentComment} 
+            <ParentComment
+              style={styles.parentComment}
               key={`comment#${i}`}>
-              
-            
+
+
               <div style={styles.userDateDiv}>
                 <span>{comment.user}:</span>
                 <span style={styles.dateSpan}>{`${calendarDay}: ${timeOfDay}`}</span>
-                
+
               </div>
-              
+
 
 
               <div style={styles.textContentSpan}>{comment.textContent}</div>
             </ParentComment>
-        )
-      })}
+          )
+        })}
       </div>
     )
   }

@@ -1,11 +1,18 @@
+var newrelic = require('newrelic');
 const express = require('express');
 const bodyParser = require('body-parser');
 // const db = require('../database');
 const app = express();
 const PORT = 3004;
+app.locals.newrelic = newrelic;
 const { Sequelize, sequelize } = require('../database/postgresDB/config.js');
 const { Comment, getComment, getAllComments, postComment } = require('../database/postgresDB/models/comments.js');
+const cors = require('cors');
+const path = require('path');
 // require('../database/mongoDB/config.js');
+app.use(cors());
+app.use('/', express.static(path.join(__dirname, '../public')));
+app.use(/\/\d+\//, express.static(path.join(__dirname, '../public')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,7 +21,7 @@ app.use(express.static(__dirname + '/../client/public'));
 
 
 app.get('/api/comment/:id', (req, res) => {
-	getComment((error, results) => {
+	getComment(req.params.id, (error, results) => {
 		if (error) {
 			console.log(error, 'Error with Server GET!');
 			res.status(500).send(error);
