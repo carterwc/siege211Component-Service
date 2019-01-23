@@ -23,7 +23,7 @@ var mongoInserter = async.cargo(function (comments, inserterCallback) {
 console.time('seedTimer');
 for (var fileNumber = 0; fileNumber < 10; fileNumber++) {
   // console.log('got here')
-  const filename = path.join(__dirname, 'data', `outputTest${fileNumber}.csv`);
+  const filename = path.join(__dirname, '..', 'postgresDB', 'data', `outputTest${fileNumber}.csv`);
   var stream = fs.createReadStream(filename);
   // var parse = csv.fromStream(stream, { headers: true });
   csv.fromStream(stream, { headers: true })

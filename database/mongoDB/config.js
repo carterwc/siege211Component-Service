@@ -1,9 +1,9 @@
 var mongoose = require('mongoose');
 mongoose.connect('mongodb://localhost/SDC');
 
-var db = mongoose.connection;
-db.on('error', console.error.bind(console, 'connection error:'));
-db.once('open', function () {
+var mongoDB = mongoose.connection;
+mongoDB.on('error', console.error.bind(console, 'connection error:'));
+mongoDB.once('open', function () {
   console.log('we connected!!!!')
 });
 
@@ -18,5 +18,6 @@ var commentSchema = new mongoose.Schema({
 var MongoComment = mongoose.model('Comment', commentSchema);
 
 module.exports = {
-  MongoComment
+  MongoComment,
+  mongoDB
 }

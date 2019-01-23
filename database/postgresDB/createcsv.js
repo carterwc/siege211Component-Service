@@ -21,9 +21,9 @@ for (var fileNumber = 0; fileNumber < 10; fileNumber++) {
   for (var i = 0; i < 1000000; i++) {
     var fakeObj = {
       textContent: faker.lorem.sentence(),
-      dateCreated: new Date().toISOString().slice(0, 19).replace('T', ' '),
+      id: (1000000 * fileNumber) + i,
+      commentDate: new Date().toDateString(),
       user: faker.random.word() + faker.random.number({ min: 1, max: 999 }),
-      idParentComment: 0,
       songID: faker.random.number({ min: 0, max: 10000000 })
     };
     csvStream.write(fakeObj);
